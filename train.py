@@ -45,12 +45,3 @@ def train_till_convergence(input_dim: int,
             print(f"Epoch {epoch}, Train error: {train_error}, Generalization error: {generalization_error}")
         generalization_error = data_model.generalization_error(model)
     return train_error, generalization_error
-
-if __name__ == "__main__":
-    input_dim = d
-    num_samples = n
-    hidden_dim = m
-    corruption_rate = 0.1
-    signal_level = 0.1
-    train_error, generalization_error = train_till_convergence(input_dim, num_samples, hidden_dim, corruption_rate, signal_level, verbose=True)
-    print(f"Train error: {train_error}, Generalization error: {generalization_error}")
