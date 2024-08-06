@@ -58,7 +58,7 @@ class DataModel:
         """
         input_dataset = torch.zeros(self.num_validation_samples, self.input_dim)
         output_dataset = torch.zeros(self.num_validation_samples, dtype=torch.int)
-        for i in range(self.num_samples):
+        for i in range(self.num_validation_samples):
             y = (2 * (torch.rand(1) < 0.5).float() - 1).int().item()
             x = (self.signal_level ** 0.5) * y * self.signal_vector
             noise = torch.randn(self.input_dim) / self.input_dim ** 0.5
