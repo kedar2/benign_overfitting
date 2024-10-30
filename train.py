@@ -10,7 +10,8 @@ def train_till_convergence(input_dim: int,
                            corruption_rate: float,
                            signal_level: float, 
                            verbosity: int=-1,
-                           stopping_threshold: float=1e-6) -> Tuple[float, float]:
+                           stopping_threshold: float=1e-6,
+                           num_trials: float=1) -> Tuple[float, float]:
     """
     Trains a model with a given set of hyperparameters
     and returns the train and generalization error after convergence to 0 loss.
