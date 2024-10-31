@@ -26,13 +26,9 @@ class DataModel:
 
         Returns input dataset X and output dataset y.
         """
-
-        # Old code
         
         input_dataset = torch.zeros(self.num_samples, self.input_dim)
         output_dataset = torch.zeros(self.num_samples, dtype=torch.int)
-
-
 
         for i in range(self.num_samples):
             true_y = (2 * (torch.rand(1) < 0.5).float() - 1).int().item()
@@ -43,18 +39,6 @@ class DataModel:
             x += ((1 - self.signal_level) ** 0.5) * noise
             input_dataset[i] = x
             output_dataset[i] = 1 if observed_y == 1 else 0
-        
-
-        """
-        # better vectorized code
-        true_y = 2 * (torch.rand(self.num_samples) < 0.5).float() - 1
-        corruptions = (torch.rand(self.num_samples) < self.corruption_rate).float()
-        observed_y = true_y * (1 - 2 * corruptions)
-        noise = torch.randn(self.num_samples, self.input_dim) / self.input_dim ** 0.5
-        noise -= (noise @ self.signal_vector) @ self.signal_vector.t()
-        input_dataset = (self.signal_level ** 0.5) * true_y.view(-1, 1) * self.signal_vector + ((1 - self.signal_level) ** 0.5) * noise
-        output_dataset = (observed_y == 1).int().view(-1, 1)
-        """
         self.train_dataset = input_dataset, output_dataset.reshape(-1, 1)
         
         return self.train_dataset
