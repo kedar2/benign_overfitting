@@ -10,7 +10,7 @@ class TwoLayerNet(nn.Module):
         self.leakyrelu = nn.LeakyReLU(leaky_param)
 
         # second layer should be frozen, alternting between -1 and 1 in shape of hidden_dim
-        self.fc2 = 2 * ((torch.ones(hidden_dim, 1, requires_grad=False) % 2) == 0).float() - 1
+        self.fc2 = 2 * ((torch.arange(hidden_dim, requires_grad=False) % 2) == 0).float().view(-1, 1) - 1
 
     def forward(self, x):
         out = self.fc1(x)
